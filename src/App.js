@@ -1,23 +1,46 @@
-import logo from './logo.svg';
-import './App.css';
+import logo from "./logo.svg";
+import "./App.css";
+import { useState, useEffect } from "react";
+
+import Slider from "./Slider";
 
 function App() {
+  var something = 4;
+
+  var [time, setTime] = useState(0);
+
+  // useEffect(()=>{},[]);
+  useEffect(() => {
+    setInterval(() => {
+      setTime((el) => el + 1);
+    }, 1000);
+  }, []);
+
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
+    <div>
+      <div
+        style={{
+          display: "flex",
+          justifyContent: "space-between",
+          fontSize: "20px",
+        }}
+      >
+        <div> A Nice Website</div>
+        <div>{`${parseInt(time / 60)} min ${time % 60} sec`}</div>
+      </div>
+      <div style={{ display: "flex", justifyContent: "flex-end" }}>
+        <button
+          onClick={() => {
+            setTime(time + 60);
+          }}
         >
-          Learn React
-        </a>
-      </header>
+          + Add 1s
+        </button>
+      </div>
+      <br />
+      <br />
+      <br />
+      <Slider />
     </div>
   );
 }
